@@ -17,7 +17,9 @@ const kartResimler=[
 
 function App() {
   const [kartlar,setKartlar]=useState([]);
-
+  const [birinciSecilen,setBirinciSecilen]=useState([]);
+  const [ikinciSecilen,setIkinciSecilen]=useState([]);
+  
   const karistir=()=>{
 	  
     const karistirilmisKartlar=[...kartResimler,...kartResimler]
@@ -25,6 +27,12 @@ function App() {
     .map((k)=>({...k,id:Math.random()}))
 
     setKartlar(karistirilmisKartlar);
+  }
+
+  const kartSec=(kart)=>{
+    console.log(kart);
+  
+    birinciSecilen ? setIkinciSecilen(kart) : setBirinciSecilen(kart);
   }
   
   console.log(kartlar);
@@ -35,7 +43,7 @@ function App() {
       <button onClick={karistir}>Yeni Oyun</button>
       <div className='card-grid'>
         {kartlar.map(kart=>(
-	        <Card key={kart.id} kart={kart} />
+	        <Card key={kart.id} kart={kart} kartSec={kartSec}/>
         ))}
       </div>
     </div>
