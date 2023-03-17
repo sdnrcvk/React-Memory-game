@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Card from './components/Card';
 
 const kartResimler=[
@@ -19,6 +19,22 @@ function App() {
   const [kartlar,setKartlar]=useState([]);
   const [birinciSecilen,setBirinciSecilen]=useState([]);
   const [ikinciSecilen,setIkinciSecilen]=useState([]);
+  const [secimSayisi,setSecimSayisi]=useState(0);
+
+  useEffect(()=>{
+
+    if(birinciSecilen && ikinciSecilen){
+  
+      if(birinciSecilen.src===ikinciSecilen.src){
+      console.log("kartlar eşleşti");
+      secimSayisiResetle();
+      }else{
+      console.log("kartlar eşleşmedi");
+      secimSayisiResetle();
+      }
+    }
+  
+  },[birinciSecilen,ikinciSecilen])
   
   const karistir=()=>{
 	  
@@ -35,6 +51,13 @@ function App() {
     birinciSecilen ? setIkinciSecilen(kart) : setBirinciSecilen(kart);
   }
   
+  const secimSayisiResetle=()=>{
+    setBirinciSecilen(null);
+    setIkinciSecilen(null);
+    setSecimSayisi(oncekiSayi=>oncekiSayi+1);
+  
+  }
+
   console.log(kartlar);
 
   return (
