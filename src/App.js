@@ -3,16 +3,16 @@ import { useState,useEffect } from 'react';
 import Card from './components/Card';
 
 const kartResimler=[
-  {"src":"/img/1.png"},
-  {"src":"/img/2.png"},
-  {"src":"/img/4.png"},
-  {"src":"/img/5.png"},
-  {"src":"/img/7.png"},
-  {"src":"/img/8.png"},
-  {"src":"/img/9.png"},
-  {"src":"/img/10.png"},
-  {"src":"/img/11.png"},
-  {"src":"/img/13.png"}
+  {"src":"/img/1.png",eslesme:false},
+  {"src":"/img/2.png",eslesme:false},
+  {"src":"/img/4.png",eslesme:false},
+  {"src":"/img/5.png",eslesme:false},
+  {"src":"/img/7.png",eslesme:false},
+  {"src":"/img/8.png",eslesme:false},
+  {"src":"/img/9.png",eslesme:false},
+  {"src":"/img/10.png",eslesme:false},
+  {"src":"/img/11.png",eslesme:false},
+  {"src":"/img/13.png",eslesme:false}
 ]
 
 function App() {
@@ -26,10 +26,18 @@ function App() {
     if(birinciSecilen && ikinciSecilen){
   
       if(birinciSecilen.src===ikinciSecilen.src){
-      console.log("kartlar eşleşti");
+      setKartlar(oncekiKart=>{
+        return oncekiKart.map(kart=>{
+        if(kart.src==birinciSecilen.src){
+          return {...kart,eslesme:true}
+        }else{
+          return kart
+        }
+        })
+      })
       secimSayisiResetle();
       }else{
-      console.log("kartlar eşleşmedi");
+      //console.log("kartlar eşleşmedi");
       secimSayisiResetle();
       }
     }
@@ -57,6 +65,7 @@ function App() {
     setSecimSayisi(oncekiSayi=>oncekiSayi+1);
   
   }
+  console.log(secimSayisi);
 
   console.log(kartlar);
 
@@ -66,7 +75,7 @@ function App() {
       <button onClick={karistir}>Yeni Oyun</button>
       <div className='card-grid'>
         {kartlar.map(kart=>(
-	        <Card key={kart.id} kart={kart} kartSec={kartSec}/>
+	        <Card key={kart.id} kart={kart} kartSec={kartSec} donus={kart === birinciSecilen || kart===ikinciSecilen || kart.eslesme}/>
         ))}
       </div>
     </div>
