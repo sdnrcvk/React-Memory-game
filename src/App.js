@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+
+const kartResimler=[
+  {"src":"/img/1.png"},
+  {"src":"/img/2.png"},
+  {"src":"/img/4.png"},
+  {"src":"/img/6.png"},
+  {"src":"/img/9.png"},
+  {"src":"/img/3.png"},
+]
 
 function App() {
+  const [kartlar,setKartlar]=useState([]);
+
+  const karistir=()=>{
+	  
+    const karistirilmisKartlar=[...kartResimler,...kartResimler]
+    .sort(()=>Math.random()-0.5)
+    .map((k)=>({...k,id:Math.random()}))
+    
+    setKartlar(karistirilmisKartlar);
+  }
+  
+  console.log(kartlar);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React Hafıza Oyunu</h1>
+      <button onClick={karistir}>Yeni Oyun</button>
     </div>
   );
 }
