@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Hafıza Oyunu</h1>
+      <h1>Çizgi Film Karakterleri ile Hafıza Oyunu</h1>
       <button onClick={karistir}>Yeni Oyun</button>
       <div className='card-grid'>
         {kartlar.map(kart=>(
